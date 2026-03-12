@@ -22,7 +22,7 @@
       "processor_name": "closeup_manual_scraper",
       "destinations": [
         {
-          "receiving_processor_name": "screw_press_1",
+          "receiving_processor_name": "slurry_storage_outdoor_closeup",
           "proportion": 1.0
         }
       ]
@@ -55,6 +55,10 @@
     },
     {
       "processor_name": "slurry_storage_outdoor_growing",
+      "destinations": []
+    },
+    {
+      "processor_name": "slurry_storage_outdoor_closeup",
       "destinations": []
     }
   ],

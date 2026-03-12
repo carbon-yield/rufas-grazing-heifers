@@ -23,7 +23,7 @@
     },
     {
       "name": "growing_alley_scraper",
-      "processor_type": "ManualScraper",
+      "processor_type": "AlleyScraper",
       "cleaning_water_use_amount": 0.0
     },
     {
@@ -82,8 +82,8 @@
       "name": "slurry_storage_outdoor_growing",
       "processor_type": "SlurryStorageOutdoor",
       "capacity": 1e10,
-      "cover": "crust",
-      "storage_time_period": 1,
+      "cover": "no_crust_or_cover",
+      "storage_time_period": 120,
       "surface_area": 500
     },
     {
