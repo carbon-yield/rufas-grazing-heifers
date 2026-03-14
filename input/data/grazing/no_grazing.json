@@ -1,0 +1,4 @@
+{
+    "description": "Empty grazing schedule for fields with no grazing animals.",
+    "grazing_periods": []
+}

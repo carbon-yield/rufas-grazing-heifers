@@ -10,7 +10,7 @@
     "animal": {
       "title": "Animal data",
       "description": "Input data and configuration information for animal management decisions, herd attributes, and housing properties.",
-      "path": "input/data/animal/rufas_match_animal.json",
+      "path": "input/data/animal/rufas_match_animal_baseline.json",
       "type": "json",
       "properties": "animal_properties"
     },
@@ -94,7 +94,7 @@
     "manure_management": {
       "title": "Manure Processor Configurations",
       "description": "Configurations of manure processors (handlers, separators, digesters, and storages) used in Manure module.",
-      "path": "input/data/manure/example_freestall_processor_configs.json",
+      "path": "input/data/manure/example_freestall_processor_configs_baseline.json",
       "type": "json",
       "properties": "manure_management_properties"
     },

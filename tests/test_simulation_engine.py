@@ -34,6 +34,7 @@ from RUFAS.biophysical.field.field.field import Field
 from RUFAS.biophysical.field.field.manure_application import ManureApplication
 from RUFAS.biophysical.field.manager.field_manager import FieldManager
 from RUFAS.biophysical.manure.manure_manager import ManureManager
+from RUFAS.biophysical.manure.pasture_manure_router import PastureManureRouter
 from RUFAS.simulation_engine import SimulationEngine
 from RUFAS.rufas_time import RufasTime
 from RUFAS.weather import Weather
@@ -51,6 +52,8 @@ def simulation_engine(mocker: MockerFixture) -> SimulationEngine:
     simulation_engine.field_manager = MagicMock(auto_spec=FieldManager)
     simulation_engine.feed_manager = MagicMock(auto_spec=FeedManager)
     simulation_engine.emissions_estimator = MagicMock(auto_spec=EmissionsEstimator)
+    simulation_engine.pasture_manure_router = MagicMock(auto_spec=PastureManureRouter)
+    simulation_engine.pasture_manure_router.route_pasture_manure.side_effect = lambda streams, fm, t: streams
 
     return simulation_engine
 

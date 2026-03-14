@@ -3,10 +3,87 @@
   "tasks": [
     {
       "task_type": "SIMULATION_SINGLE_RUN",
-      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata.json",
-      "output_prefix": "freestall",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_baseline.json",
+      "output_prefix": "baseline",
+      "log_verbosity": "errors",
+      "random_seed": 41
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_baseline.json",
+      "output_prefix": "baseline",
       "log_verbosity": "errors",
       "random_seed": 42
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_baseline.json",
+      "output_prefix": "baseline",
+      "log_verbosity": "errors",
+      "random_seed": 43
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_baseline.json",
+      "output_prefix": "baseline",
+      "log_verbosity": "errors",
+      "random_seed": 44
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata.json",
+      "output_prefix": "heifer_pasture",
+      "log_verbosity": "errors",
+      "random_seed": 41
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata.json",
+      "output_prefix": "heifer_pasture",
+      "log_verbosity": "errors",
+      "random_seed": 42
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata.json",
+      "output_prefix": "heifer_pasture",
+      "log_verbosity": "errors",
+      "random_seed": 43
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata.json",
+      "output_prefix": "heifer_pasture",
+      "log_verbosity": "errors",
+      "random_seed": 44
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_heifer_pasture_feed.json",
+      "output_prefix": "heifer_pasture_feed",
+      "log_verbosity": "errors",
+      "random_seed": 41
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_heifer_pasture_feed.json",
+      "output_prefix": "heifer_pasture_feed",
+      "log_verbosity": "errors",
+      "random_seed": 42
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_heifer_pasture_feed.json",
+      "output_prefix": "heifer_pasture_feed",
+      "log_verbosity": "errors",
+      "random_seed": 43
+    },
+    {
+      "task_type": "SIMULATION_SINGLE_RUN",
+      "metadata_file_path": "input/metadata/example_freestall_dairy_metadata_heifer_pasture_feed.json",
+      "output_prefix": "heifer_pasture_feed",
+      "log_verbosity": "errors",
+      "random_seed": 44
     }
-]
+  ]
 }

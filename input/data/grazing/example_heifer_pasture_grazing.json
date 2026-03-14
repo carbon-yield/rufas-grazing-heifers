@@ -1,0 +1,70 @@
+{
+    "description": "Grazing schedule for growing heifers on cool-season grass pasture (Wisconsin, May 1 - Sep 30). Represents direct deposition of manure on a 10 ha pasture field by 50 heifers at a stocking rate of 5 animals/ha.",
+    "grazing_periods": [
+        {
+            "start_year": 2019,
+            "start_day": 121,
+            "end_year": 2019,
+            "end_day": 273,
+            "num_animals": 50,
+            "daily_manure_dry_matter_per_animal_kg": 3.5,
+            "dry_matter_fraction": 0.12,
+            "phosphorus_fraction_of_dry_matter": 0.0065,
+            "inorganic_nitrogen_fraction": 0.035,
+            "ammonium_fraction_of_inorganic_nitrogen": 0.75,
+            "organic_nitrogen_fraction": 0.025
+        },
+        {
+            "start_year": 2020,
+            "start_day": 122,
+            "end_year": 2020,
+            "end_day": 274,
+            "num_animals": 50,
+            "daily_manure_dry_matter_per_animal_kg": 3.5,
+            "dry_matter_fraction": 0.12,
+            "phosphorus_fraction_of_dry_matter": 0.0065,
+            "inorganic_nitrogen_fraction": 0.035,
+            "ammonium_fraction_of_inorganic_nitrogen": 0.75,
+            "organic_nitrogen_fraction": 0.025
+        },
+        {
+            "start_year": 2021,
+            "start_day": 121,
+            "end_year": 2021,
+            "end_day": 273,
+            "num_animals": 50,
+            "daily_manure_dry_matter_per_animal_kg": 3.5,
+            "dry_matter_fraction": 0.12,
+            "phosphorus_fraction_of_dry_matter": 0.0065,
+            "inorganic_nitrogen_fraction": 0.035,
+            "ammonium_fraction_of_inorganic_nitrogen": 0.75,
+            "organic_nitrogen_fraction": 0.025
+        },
+        {
+            "start_year": 2022,
+            "start_day": 121,
+            "end_year": 2022,
+            "end_day": 273,
+            "num_animals": 50,
+            "daily_manure_dry_matter_per_animal_kg": 3.5,
+            "dry_matter_fraction": 0.12,
+            "phosphorus_fraction_of_dry_matter": 0.0065,
+            "inorganic_nitrogen_fraction": 0.035,
+            "ammonium_fraction_of_inorganic_nitrogen": 0.75,
+            "organic_nitrogen_fraction": 0.025
+        },
+        {
+            "start_year": 2023,
+            "start_day": 121,
+            "end_year": 2023,
+            "end_day": 273,
+            "num_animals": 50,
+            "daily_manure_dry_matter_per_animal_kg": 3.5,
+            "dry_matter_fraction": 0.12,
+            "phosphorus_fraction_of_dry_matter": 0.0065,
+            "inorganic_nitrogen_fraction": 0.035,
+            "ammonium_fraction_of_inorganic_nitrogen": 0.75,
+            "organic_nitrogen_fraction": 0.025
+        }
+    ]
+}

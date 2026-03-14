@@ -73,7 +73,7 @@
     "feed": {
       "title": "Feed data",
       "description": "Feeds available for each animal combination, purchased feeds and their prices, feed storage options, and user-defined ration percentages and associated parameters.",
-      "path": "input/data/feed/example_Midwest_feed.json",
+      "path": "input/data/feed/example_Midwest_feed_heifer_pasture.json",
       "type": "json",
       "properties": "feed_properties"
     },
@@ -118,7 +118,7 @@
       "path": "input/data/field/example_small_field_corn_alf_silage.json",
       "type": "json",
       "properties": "field_properties"
-    }, 
+    },
     "soil_1": {
       "title": "Soil data",
       "description": "Characteristic soil information, including composition, slope, and layer details.",
@@ -195,6 +195,48 @@
       "path": "input/data/tillage_schedule/no_till.json",
       "type": "json",
       "properties": "tillage_schedule_properties"
+    },
+    "field_3": {
+      "title": "Pasture field specification",
+      "description": "Pasture field with cool-season grass and heifer grazing schedule.",
+      "path": "input/data/field/example_small_pasture_field.json",
+      "type": "json",
+      "properties": "field_properties"
+    },
+    "Cool-Season-Grass-Pasture": {
+      "title": "Crop data",
+      "description": "Tall fescue pasture rotation used as a proxy for cool-season grass pasture.",
+      "path": "input/data/crop/example_tall_fescue_pasture_rotation.json",
+      "type": "json",
+      "properties": "crop_schedule_properties"
+    },
+    "fertilizer_schedule_pasture_1": {
+      "title": "Fertilizer schedule.",
+      "description": "No fertilizer applications for the pasture field (nutrients supplied by grazing manure).",
+      "path": "input/data/fertilizer_schedule/no_fertilizer.json",
+      "type": "json",
+      "properties": "fertilizer_schedule_properties"
+    },
+    "manure_schedule_pasture_1": {
+      "title": "Manure schedule.",
+      "description": "No machine-applied manure for the pasture field (manure deposited directly by grazing animals).",
+      "path": "input/data/manure_schedule/no_manure.json",
+      "type": "json",
+      "properties": "manure_schedule_properties"
+    },
+    "tillage_schedule_pasture_1": {
+      "title": "Tillage schedule.",
+      "description": "No tillage for the pasture field.",
+      "path": "input/data/tillage_schedule/no_till.json",
+      "type": "json",
+      "properties": "tillage_schedule_properties"
+    },
+    "heifer_pasture_grazing_schedule": {
+      "title": "Grazing schedule.",
+      "description": "Heifer grazing schedule for Wisconsin cool-season grass pasture, May 1 to Sep 30, 50 animals.",
+      "path": "input/data/grazing/example_heifer_pasture_grazing.json",
+      "type": "json",
+      "properties": "grazing_schedule_properties"
     },
     "weather": {
       "title": "Weather data",
@@ -332,7 +374,7 @@
         "operation": "division",
         "apply_to": "individual",
         "ordered_variables": ["number_of_heifer1s", "pen_stocking_density"],
-        "save_as": "min_num_stalls"         
+        "save_as": "min_num_stalls"
       },
       "relationship": "greater_or_equal_to"
     },
@@ -346,7 +388,7 @@
         "operation": "division",
         "apply_to": "individual",
         "ordered_variables": ["number_of_heifer2s", "pen_stocking_density"],
-        "save_as": "max_num_stalls"         
+        "save_as": "max_num_stalls"
       },
       "relationship": "greater_or_equal_to"
     }

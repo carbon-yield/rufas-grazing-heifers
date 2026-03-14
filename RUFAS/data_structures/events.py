@@ -286,6 +286,84 @@ class ManureEvent(BaseFieldManagementEvent):
         )
 
 
+class GrazingEvent(BaseFieldManagementEvent):
+    """
+    A child of BaseFieldManagementEvent class that defines a single day of grazing manure deposition on a pasture
+    field.
+
+    Parameters
+    ----------
+    year : int
+        Calendar year in which this grazing day occurs.
+    day : int
+        Julian day on which this grazing day occurs.
+    dry_matter_mass : float
+        Total dry matter mass of manure deposited by all grazing animals on this day (kg).
+    dry_matter_fraction : float
+        Fraction of the manure that is dry matter, in the range (0.0, 1.0] (unitless).
+    total_phosphorus_mass : float
+        Total mass of phosphorus deposited in manure on this day (kg).
+    inorganic_nitrogen_fraction : float
+        Fraction of dry manure mass that is inorganic nitrogen (unitless).
+    ammonium_fraction : float
+        Fraction of inorganic nitrogen that is ammonium (unitless).
+    organic_nitrogen_fraction : float
+        Fraction of dry manure mass that is organic nitrogen (unitless).
+
+    Notes
+    -----
+    Phosphorus partitioning in grazing manure follows the SurPhos model fractions for direct deposition:
+    50% water-extractable inorganic P, 5% water-extractable organic P, 11.25% stable inorganic P,
+    33.75% stable organic P (James et al., 2007).
+
+    """
+
+    def __init__(
+        self,
+        year: int,
+        day: int,
+        dry_matter_mass: float,
+        dry_matter_fraction: float,
+        total_phosphorus_mass: float,
+        inorganic_nitrogen_fraction: float,
+        ammonium_fraction: float,
+        organic_nitrogen_fraction: float,
+    ):
+        super().__init__(year=year, day=day)
+        self.dry_matter_mass = dry_matter_mass
+        self.dry_matter_fraction = dry_matter_fraction
+        self.total_phosphorus_mass = total_phosphorus_mass
+        self.inorganic_nitrogen_fraction = inorganic_nitrogen_fraction
+        self.ammonium_fraction = ammonium_fraction
+        self.organic_nitrogen_fraction = organic_nitrogen_fraction
+
+    def __eq__(self, other) -> bool:
+        """Overrides the equality operator for GrazingEvent objects."""
+        if isinstance(other, GrazingEvent):
+            return (
+                super().__eq__(other)
+                and other.dry_matter_mass == self.dry_matter_mass
+                and other.dry_matter_fraction == self.dry_matter_fraction
+                and other.total_phosphorus_mass == self.total_phosphorus_mass
+                and other.inorganic_nitrogen_fraction == self.inorganic_nitrogen_fraction
+                and other.ammonium_fraction == self.ammonium_fraction
+                and other.organic_nitrogen_fraction == self.organic_nitrogen_fraction
+            )
+        return False
+
+    def __hash__(self) -> int:
+        """Overrides the hash method for GrazingEvent objects."""
+        return hash(
+            (
+                self.year,
+                self.day,
+                self.dry_matter_mass,
+                self.dry_matter_fraction,
+                self.total_phosphorus_mass,
+            )
+        )
+
+
 class FertilizerEvent(BaseFieldManagementEvent):
     """
     A child of BaseFieldManagementEvent class that defines the parameters of a single fertilizer application.

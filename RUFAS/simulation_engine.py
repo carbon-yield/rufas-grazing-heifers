@@ -14,6 +14,7 @@ from RUFAS.input_manager import InputManager
 from RUFAS.output_manager import OutputManager
 from RUFAS.biophysical.field.manager.field_manager import FieldManager
 from RUFAS.biophysical.manure.manure_manager import ManureManager
+from RUFAS.biophysical.manure.pasture_manure_router import PastureManureRouter
 from RUFAS.rufas_time import RufasTime
 from RUFAS.weather import Weather
 
@@ -149,6 +150,10 @@ class SimulationEngine:
             self.feed_manager.available_feeds, self.time, self.weather, total_inventory
         )
 
+        all_manure_data = self.pasture_manure_router.route_pasture_manure(
+            all_manure_data, self.field_manager, self.time
+        )
+
         self.manure_manager.run_daily_update(
             all_manure_data, self.time, self.weather.get_current_day_conditions(self.time)
         )
@@ -277,6 +282,8 @@ class SimulationEngine:
         self.manure_manager: ManureManager = ManureManager(
             self.weather.intercept_mean_temp, self.weather.phase_shift, self.weather.amplitude
         )
+
+        self.pasture_manure_router: PastureManureRouter = PastureManureRouter()
 
         self.emissions_estimator: EmissionsEstimator = EmissionsEstimator()
         feed_manager_available_feed_ids = [feed.rufas_id for feed in self.feed_manager.available_feeds]
