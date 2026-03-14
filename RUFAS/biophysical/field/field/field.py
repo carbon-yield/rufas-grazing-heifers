@@ -7,6 +7,7 @@ from RUFAS.data_structures.crop_soil_to_feed_storage_connection import Harvested
 from RUFAS.data_structures.events import (
     BaseFieldManagementEvent,
     FertilizerEvent,
+    GrazingEvent,
     HarvestEvent,
     ManureEvent,
     PlantingEvent,
@@ -91,6 +92,8 @@ class Field:
         List of ManureApplication objects.
     manure_events: List[ManureEvent]
         List of all manure applications that will be applied to this field.
+    grazing_events : list[GrazingEvent]
+        List of daily grazing events during which animals deposit manure directly on the pasture.
 
     Methods
     -------
@@ -109,6 +112,7 @@ class Field:
         fertilizer_events: Optional[List[FertilizerEvent]] = None,
         fertilizer_mixes: Optional[Dict[str, Dict[str, float]]] = None,
         manure_events: Optional[List[ManureEvent]] = None,
+        grazing_events: Optional[List[GrazingEvent]] = None,
     ) -> None:
         # field-wide attributes
         self.om = OutputManager()
@@ -141,6 +145,8 @@ class Field:
         self.manure_applicator = ManureApplication(self.soil.data)
 
         self.manure_events: list[ManureEvent] = manure_events or []
+
+        self.grazing_events: list[GrazingEvent] = grazing_events or []
 
     def manage_field(
         self,
@@ -175,6 +181,7 @@ class Field:
         """
         # --- Soil Management---
         self._check_fertilizer_application_schedule(time)
+        self._check_grazing_schedule(time)
 
         for manure_application in manure_applications:
             manure_event = manure_application.event
@@ -1015,6 +1022,32 @@ class Field:
                 event.surface_remainder_fraction,
                 event.year,
                 event.day,
+            )
+
+    def _check_grazing_schedule(self, time: RufasTime) -> None:
+        """
+        Checks the list of GrazingEvents and applies grazing manure for all events occurring today.
+
+        For each grazing event on the current day, calls ``apply_grazing_manure`` on the field's manure
+        applicator, which deposits manure directly onto the pasture soil using the SurPhos grazing manure
+        phosphorus partitioning fractions.
+
+        Parameters
+        ----------
+        time : RufasTime
+            RufasTime object containing the current year and day of the simulation.
+
+        """
+        self.grazing_events, todays_grazing_events = self._filter_events(self.grazing_events, time)
+        for event in todays_grazing_events:
+            self.manure_applicator.apply_grazing_manure(
+                dry_matter_mass=event.dry_matter_mass,
+                dry_matter_fraction=event.dry_matter_fraction,
+                total_phosphorus_mass=event.total_phosphorus_mass,
+                inorganic_nitrogen_fraction=event.inorganic_nitrogen_fraction,
+                ammonium_fraction=event.ammonium_fraction,
+                organic_nitrogen_fraction=event.organic_nitrogen_fraction,
+                field_size=self.field_data.field_size,
             )
 
     def _check_tillage_schedule(self, time: RufasTime) -> None:

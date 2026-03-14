@@ -1,0 +1,16 @@
+{
+    "crop_schedules": [
+        {
+            "crop_species": "tall_fescue_hay",
+            "planting_days": [121],
+            "planting_years": [2019],
+            "harvest_days": [274],
+            "harvest_years": [2019],
+            "harvest_operations": ["harvest_kill"],
+            "harvest_type": "scheduled",
+            "pattern_repeat": 4,
+            "planting_skip": 0,
+            "harvesting_skip": 0
+        }
+    ]
+}

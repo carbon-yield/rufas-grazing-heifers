@@ -9,8 +9,8 @@
     },
     "animal": {
       "title": "Animal data",
-      "description": "Input data and configuration information for animal management decisions, herd attributes, and housing properties.",
-      "path": "input/data/animal/rufas_match_animal.json",
+      "description": "Animal configuration with pasture routing: growing heifers routed directly to pasture field (May 1–Sep 30) via PastureManureRouter, bypassing the manure processor chain during the grazing season.",
+      "path": "input/data/animal/rufas_match_animal_heifer_pasture_routing.json",
       "type": "json",
       "properties": "animal_properties"
     },
@@ -197,9 +197,9 @@
       "properties": "tillage_schedule_properties"
     },
     "field_3": {
-      "title": "Pasture field specification",
-      "description": "Pasture field with cool-season grass and heifer grazing schedule.",
-      "path": "input/data/field/example_small_pasture_field.json",
+      "title": "Pasture field specification (Scenario E)",
+      "description": "Pasture field receiving growing heifer manure directly via PastureManureRouter. No static grazing schedule — nutrient deposition is driven by actual animal manure production each day.",
+      "path": "input/data/field/example_small_pasture_field_routing.json",
       "type": "json",
       "properties": "field_properties"
     },
@@ -230,13 +230,6 @@
       "path": "input/data/tillage_schedule/no_till.json",
       "type": "json",
       "properties": "tillage_schedule_properties"
-    },
-    "heifer_pasture_grazing_schedule": {
-      "title": "Grazing schedule.",
-      "description": "Heifer grazing schedule for Wisconsin cool-season grass pasture, May 1 to Sep 30, 50 animals.",
-      "path": "input/data/grazing/example_heifer_pasture_grazing.json",
-      "type": "json",
-      "properties": "grazing_schedule_properties"
     },
     "weather": {
       "title": "Weather data",

@@ -2,7 +2,14 @@ from typing import Any
 from datetime import date
 
 from RUFAS.data_structures.crop_soil_to_feed_storage_connection import HarvestedCrop
-from RUFAS.data_structures.events import FertilizerEvent, ManureEvent, TillageEvent, PlantingEvent, HarvestEvent
+from RUFAS.data_structures.events import (
+    FertilizerEvent,
+    GrazingEvent,
+    HarvestEvent,
+    ManureEvent,
+    PlantingEvent,
+    TillageEvent,
+)
 from RUFAS.data_structures.manure_supplement_methods import ManureSupplementMethod
 from RUFAS.data_structures.manure_to_crop_soil_connection import (
     ManureEventNutrientRequest,
@@ -17,6 +24,7 @@ from RUFAS.biophysical.field.field.field_data import FieldData
 from RUFAS.biophysical.field.manager.crop_schedule import CropSchedule
 from RUFAS.biophysical.field.manager.fertilizer_schedule import FertilizerSchedule
 from RUFAS.biophysical.field.manager.field_data_reporter import FieldDataReporter
+from RUFAS.biophysical.field.manager.grazing_schedule import GrazingSchedule
 from RUFAS.biophysical.field.manager.manure_schedule import ManureSchedule
 from RUFAS.biophysical.field.manager.tillage_schedule import TillageSchedule
 from RUFAS.biophysical.field.soil.layer_data import LayerData
@@ -111,6 +119,24 @@ class FieldManager:
 
         return harvested_crops
 
+    def get_field_by_name(self, name: str) -> "Field | None":
+        """Return the Field whose name matches *name*, or None if not found.
+
+        Parameters
+        ----------
+        name : str
+            The field metadata key (e.g. ``"field_3"``).
+
+        Returns
+        -------
+        Field | None
+            The matching Field, or None.
+        """
+        for field in self.fields:
+            if field.field_data.name == name:
+                return field
+        return None
+
     def annual_update_routine(self) -> None:
         """
         This method will run the annual routine in the field, which will be calling the perform_annual_reset() method
@@ -188,6 +214,10 @@ class FieldManager:
             field_configuration_data["crop_specification"], available_crop_configs
         )
 
+        grazing_events = FieldManager._setup_grazing_events(
+            field_configuration_data.get("grazing_management_specification")
+        )
+
         return Field(
             field_data=field_data,
             soil=soil_profile,
@@ -197,6 +227,7 @@ class FieldManager:
             fertilizer_events=fertilizer_events,
             fertilizer_mixes=available_fertilizer_mixes,
             manure_events=manure_events,
+            grazing_events=grazing_events,
         )
 
     @staticmethod
@@ -369,6 +400,48 @@ class FieldManager:
         )
         manure_events = manure_schedule_instance.generate_manure_events()
         return manure_events
+
+    @staticmethod
+    def _setup_grazing_events(grazing_schedule_key: str | None) -> list[GrazingEvent]:
+        """
+        Sets up a list of GrazingEvents from a GrazingSchedule, if a grazing schedule is specified.
+
+        Parameters
+        ----------
+        grazing_schedule_key : str | None
+            Name of the metadata blob that contains the grazing schedule information, or None if this
+            field has no grazing.
+
+        Returns
+        -------
+        list[GrazingEvent]
+            A list of daily grazing events, empty if no grazing schedule is configured.
+
+        """
+        if grazing_schedule_key is None:
+            return []
+        im = InputManager()
+        grazing_data: dict[str, Any] = im.get_data(grazing_schedule_key)
+        if grazing_data is None:
+            return []
+        periods: list[dict[str, Any]] = grazing_data.get("grazing_periods", [])
+        if not periods:
+            return []
+        grazing_schedule_instance = GrazingSchedule(
+            name=grazing_schedule_key,
+            start_years=[p["start_year"] for p in periods],
+            start_days=[p["start_day"] for p in periods],
+            end_years=[p["end_year"] for p in periods],
+            end_days=[p["end_day"] for p in periods],
+            num_animals_list=[p["num_animals"] for p in periods],
+            daily_manure_dm_per_animal_list=[p["daily_manure_dry_matter_per_animal_kg"] for p in periods],
+            dry_matter_fractions=[p["dry_matter_fraction"] for p in periods],
+            phosphorus_fractions_of_dm=[p["phosphorus_fraction_of_dry_matter"] for p in periods],
+            inorganic_nitrogen_fractions=[p["inorganic_nitrogen_fraction"] for p in periods],
+            ammonium_fractions=[p["ammonium_fraction_of_inorganic_nitrogen"] for p in periods],
+            organic_nitrogen_fractions=[p["organic_nitrogen_fraction"] for p in periods],
+        )
+        return grazing_schedule_instance.generate_grazing_events()
 
     @staticmethod
     def _setup_tillage_events(tillage_schedule: str) -> list[TillageEvent]:
