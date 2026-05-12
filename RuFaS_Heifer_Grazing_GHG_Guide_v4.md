@@ -217,7 +217,7 @@ Full step-by-step instructions are in `RuFaS_Heifer_Grazing_Reproduction_Guide.m
 git clone https://github.com/carbon-yield/rufas-grazing-heifers.git
 cd rufas-grazing-heifers
 git checkout heifer-pasture-analysis
-pip install -r requirements.txt
+pip install .
 python main.py input/data/tasks/example_freestall_task.json
 ```
 
